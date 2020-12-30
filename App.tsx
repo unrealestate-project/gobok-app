@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { SafeAreaView, StatusBar, Text, View } from 'react-native'
-import { analytics } from './src/infra/Analytics'
+import { analytics } from 'infra/Analytics'
 
 const App = () => {
   useEffect(() => {
