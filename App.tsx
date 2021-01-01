@@ -1,23 +1,16 @@
 import React, { useEffect } from 'react'
-import { SafeAreaView, StatusBar, Text, View } from 'react-native'
 import Bugsnag from '@bugsnag/react-native'
 import { analytics } from 'infra/Analytics'
+import { RootNavigator } from 'navigation/RootNavigator'
 
 const App = () => {
   useEffect(() => {
-    Bugsnag.start()
-    analytics.init()
+    if (!__DEV__) {
+      Bugsnag.start()
+      analytics.init()
+    }
   }, [])
-  return (
-    <>
-      <StatusBar />
-      <SafeAreaView>
-        <View>
-          <Text>Hello World</Text>
-        </View>
-      </SafeAreaView>
-    </>
-  )
+  return <RootNavigator />
 }
 
 export default App

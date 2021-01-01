@@ -7,5 +7,6 @@ module.exports = {
     semi: 'off',
     'jsx-quotes': ['error', 'prefer-single'],
     curly: 'off',
+    'react-native/no-inline-styles': 'off',
   },
 }
