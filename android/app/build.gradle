@@ -129,11 +129,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.landapp"
+        applicationId "io.landcorp.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.parseInt(APP_VERSION_CODE)
+        versionName APP_VERSION_NAME
     }
     splits {
         abi {
@@ -150,15 +150,23 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file(APP_RELEASE_STORE_FILE)
+            storePassword APP_RELEASE_STORE_PASSWORD
+            keyAlias APP_RELEASE_KEY_ALIAS
+            keyPassword APP_RELEASE_KEY_PASSWORD
+        }
     }
     buildTypes {
         debug {
+            resValue "string", "app_name", "고대복덕방(디버그)"
             signingConfig signingConfigs.debug
+            versionNameSuffix "-DEBUG"
+            applicationIdSuffix ".debug"
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            resValue "string", "app_name", "고대복덕방"
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }

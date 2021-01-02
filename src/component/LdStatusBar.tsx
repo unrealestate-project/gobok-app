@@ -4,6 +4,6 @@ import { COLORS } from 'infra/Colors'
 
 export const LdStatusBar = () => {
   return (
-    <StatusBar backgroundColor={COLORS.primary300} barStyle='light-content' />
+    <StatusBar backgroundColor={COLORS.primary600} barStyle='light-content' />
   )
 }
