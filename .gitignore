@@ -61,3 +61,6 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+# Srcmap Bundle for Bugsnag
+bundle/
