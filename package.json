@@ -7,7 +7,18 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "check-dep": "yarn upgrade-interactive --latest",
+    "cp-a": "appcenter codepush release-react -a Land-Corporation/LandApp-Android -d Production",
+    "cp-i": "appcenter codepush release-react -a Land-Corporation/LandApp-iOS -d Production",
+    "cp-ls-a": "appcenter codepush deployment history -a Land-Corporation/LandApp-Android Production",
+    "cp-ls-i": "appcenter codepush deployment history -a Land-Corporation/LandApp-iOS Production",
+    "sm-a": "scripts/upload-srcmap-android.sh",
+    "sm-i": "scripts/upload-srcmap-ios.sh",
+    "bundle-a": "android/gradlew -p android/app bundleRelease && cp android/app/build/outputs/bundle/release/app-release.aab $HOME/Desktop/$(date '+%y%m%d_%H%M%S').aab",
+    "install-a": "android/gradlew -p android/app installRelease",
+    "assemble-a": "android/gradlew -p android/app assembleRelease && cp android/app/build/outputs/apk/release/app-release.apk $HOME/Desktop/$(date '+%y%m%d_%H%M%S').apk",
+    "ver-up": "scripts/increment-version.sh"
   },
   "dependencies": {
     "@bugsnag/react-native": "7.5.5",
