@@ -159,7 +159,7 @@ android {
     }
     buildTypes {
         debug {
-            resValue "string", "app_name", "고대복덕방(디버그)"
+            resValue "string", "app_name", "ㄱㄷㅂㄷㅂ"
             signingConfig signingConfigs.debug
             versionNameSuffix "-DEBUG"
             applicationIdSuffix ".debug"
