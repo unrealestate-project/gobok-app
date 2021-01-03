@@ -9,8 +9,8 @@ export const setToken = (t: string | null) => {
 export interface NetworkMessage {
   status: number
   data?: any
-  arr?: any[]
-  msg?: string
+  arr?: any
+  detail?: string
 }
 
 export class BaseApi {
@@ -36,6 +36,29 @@ export class BaseApi {
       method: 'POST',
       headers: this.commonHeaders,
       body: JSON.stringify(body),
+    })
+    if (res.status === 500) throw new ServiceError()
+    return await res.json()
+  }
+
+  protected async postFormData(
+    path: string,
+    body: object,
+  ): Promise<NetworkMessage> {
+    const formData = new FormData()
+    for (const [k, v] of Object.entries(body)) {
+      formData.append(k, v)
+    }
+    // NOTE(viz.ko):
+    // remove content-type header from headers
+    // so that browser can inject content-type with boundary definition
+    // https://stackoverflow.com/a/35799817/3535760
+    const headers = this.commonHeaders
+    delete headers['Content-Type']
+    const res = await fetch(`${SERVER_BASE_URL}/api${path}`, {
+      method: 'POST',
+      headers: headers,
+      body: formData,
     })
     if (res.status === 500) throw new ServiceError()
     return await res.json()
