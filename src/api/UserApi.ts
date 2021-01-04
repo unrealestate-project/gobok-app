@@ -17,7 +17,7 @@ class UserApi extends BaseApi {
   }
 
   async feedback(title: string, content: string) {
-    const res = await this.post('/profile/feedback', {
+    const res = await this.post('/my/feedback', {
       title,
       content,
     })
