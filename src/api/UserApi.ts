@@ -3,8 +3,10 @@ import { ApiError } from 'api/ApiError'
 
 class UserApi extends BaseApi {
   async getCode(email: string) {
-    const res = await this.get(`/auth/code?email=${email}`)
-    if (res.status !== 200) throw new ApiError(res)
+    const res = await this.post('/auth/code', {
+      email,
+    })
+    // if (res.status !== 200) throw new ApiError(res)
   }
 
   async login(email: string, code: string): Promise<string> {
@@ -12,8 +14,8 @@ class UserApi extends BaseApi {
       email,
       code,
     })
-    if (res.status !== 200) throw new ApiError(res)
-    return res.data
+    // if (res.status !== 200) throw new ApiError(res)
+    return res
   }
 
   async feedback(title: string, content: string) {
