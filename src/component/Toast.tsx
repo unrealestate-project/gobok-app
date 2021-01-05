@@ -1,5 +1,6 @@
 import React from 'react'
 import { Animated, Easing, StyleSheet, Text } from 'react-native'
+import { COLORS } from 'infra/Colors'
 
 const formatStringOrError = (content: string | Error) => {
   return content instanceof Error
@@ -75,6 +76,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   toastText: {
-    color: '#fff',
+    color: COLORS.white,
   },
 })

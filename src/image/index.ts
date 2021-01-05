@@ -13,3 +13,7 @@ export const getBottomTabIcon = (route: string, focused: boolean) => {
   // @ts-ignore
   return icons[`${routeToIcon[route]}_${focused ? 'FOCUSED' : 'UNFOCUSED'}`]
 }
+
+export const PROFILE_PLACEHOLDER = require('./profile.png')
+export const ARROW_RIGHT = require('./arrow-right.png')
+export const ARROW_RIGHT_PRIMARY = require('./arrow-right-primary.png')
