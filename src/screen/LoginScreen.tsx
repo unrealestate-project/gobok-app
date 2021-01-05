@@ -93,6 +93,7 @@ export const LoginScreen = observer(() => {
                   : '코드 받기'
               }
               onClick={async () => {
+                if (store.current.email.length === 0) return
                 try {
                   store.current.codeDisabled = true
                   store.current.interval = setInterval(() => {
@@ -123,6 +124,7 @@ export const LoginScreen = observer(() => {
             <LdButton
               title='로그인'
               onClick={async () => {
+                if (store.current.code.length === 0) return
                 try {
                   const { email, code } = store.current
                   store.current.loginDisabled = true

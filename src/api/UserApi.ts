@@ -6,7 +6,7 @@ class UserApi extends BaseApi {
     const res = await this.post('/auth/code', {
       email,
     })
-    // if (res.status !== 200) throw new ApiError(res)
+    if (res.status !== 200) throw new ApiError(res)
   }
 
   async login(email: string, code: string): Promise<string> {
@@ -14,8 +14,8 @@ class UserApi extends BaseApi {
       email,
       code,
     })
-    // if (res.status !== 200) throw new ApiError(res)
-    return res
+    if (res.status !== 200) throw new ApiError(res)
+    return res.data
   }
 
   async feedback(title: string, content: string) {

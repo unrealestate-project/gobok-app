@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { ProfileStackNavigator } from 'navigation/ProfileStackNavigator'
 import { RoomStackNavigator } from 'navigation/RoomStackNavigator'
@@ -10,14 +10,18 @@ import { LdStatusBar } from 'component/LdStatusBar'
 import { userStore } from 'store/UserStore'
 import { LoginScreen } from 'screen/LoginScreen'
 import { Toast } from 'component/Toast'
+import { observer } from 'mobx-react'
 
 const Tab = createBottomTabNavigator()
 
-export const RootNavigator = () => {
+export const RootNavigator = observer(() => {
+  useEffect(() => {
+    userStore.load()
+  }, [])
   return (
     <NavigationContainer>
       <LdStatusBar />
-      {!userStore.hasToken ? (
+      {!userStore.loading && !userStore.hasToken ? (
         <LoginScreen />
       ) : (
         <Tab.Navigator
@@ -56,4 +60,4 @@ export const RootNavigator = () => {
       <Toast />
     </NavigationContainer>
   )
-}
+})
