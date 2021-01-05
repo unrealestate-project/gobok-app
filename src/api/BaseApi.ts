@@ -9,7 +9,7 @@ export const setToken = (t: string | null) => {
 export interface NetworkMessage {
   status: number
   data?: any
-  arr?: any
+  array?: any
   detail?: string
 }
 
@@ -18,12 +18,12 @@ export class BaseApi {
     return {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'x-access-token': token || '',
+      Authorization: token ? `JWT ${token}` : '',
     }
   }
 
   protected async get(path: string): Promise<NetworkMessage> {
-    const res = await fetch(`${SERVER_BASE_URL}${path}`, {
+    const res = await fetch(`${SERVER_BASE_URL}${path}/`, {
       method: 'GET',
       headers: this.commonHeaders,
     })
@@ -32,7 +32,7 @@ export class BaseApi {
   }
 
   protected async post(path: string, body?: object): Promise<NetworkMessage> {
-    const res = await fetch(`${SERVER_BASE_URL}${path}`, {
+    const res = await fetch(`${SERVER_BASE_URL}${path}/`, {
       method: 'POST',
       headers: this.commonHeaders,
       body: JSON.stringify(body),
@@ -55,7 +55,7 @@ export class BaseApi {
     // https://stackoverflow.com/a/35799817/3535760
     const headers = this.commonHeaders
     delete headers['Content-Type']
-    const res = await fetch(`${SERVER_BASE_URL}${path}`, {
+    const res = await fetch(`${SERVER_BASE_URL}${path}/`, {
       method: 'POST',
       headers: headers,
       body: formData,
@@ -65,7 +65,7 @@ export class BaseApi {
   }
 
   protected async put(path: string, body: object): Promise<NetworkMessage> {
-    const res = await fetch(`${SERVER_BASE_URL}${path}`, {
+    const res = await fetch(`${SERVER_BASE_URL}${path}/`, {
       method: 'PUT',
       headers: this.commonHeaders,
       body: JSON.stringify(body),
@@ -78,7 +78,7 @@ export class BaseApi {
     path: string,
     body: object = {},
   ): Promise<NetworkMessage> {
-    const res = await fetch(`${SERVER_BASE_URL}${path}`, {
+    const res = await fetch(`${SERVER_BASE_URL}${path}/`, {
       method: 'DELETE',
       headers: this.commonHeaders,
       body: JSON.stringify(body),

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import { COLORS } from 'infra/Colors'
+import { StyleProp, TextStyle, ViewStyle } from 'react-native'
 
 const ButtonContainer = styled.TouchableOpacity`
   background-color: ${(props: { disabled: boolean }) =>
@@ -21,10 +22,12 @@ export const LdButton: React.FC<{
   title: string
   onClick: () => void
   disabled?: boolean
-}> = ({ title, onClick, disabled = false }) => {
+  style?: StyleProp<ViewStyle>
+  textStyle?: StyleProp<TextStyle>
+}> = ({ title, onClick, disabled = false, style, textStyle }) => {
   return (
-    <ButtonContainer onPress={onClick} disabled={disabled}>
-      <ButtonText>{title}</ButtonText>
+    <ButtonContainer onPress={onClick} disabled={disabled} style={style}>
+      <ButtonText style={textStyle}>{title}</ButtonText>
     </ButtonContainer>
   )
 }

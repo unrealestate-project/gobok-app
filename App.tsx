@@ -3,6 +3,7 @@ import Bugsnag from '@bugsnag/react-native'
 import { analytics } from 'infra/Analytics'
 import { RootNavigator } from 'navigation/RootNavigator'
 import { keyboardStore } from 'store/KeyboardStore'
+import 'moment/locale/ko'
 
 const App = () => {
   useEffect(() => {

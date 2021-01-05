@@ -6,7 +6,7 @@ class RoomApi extends BaseApi {
   async getRooms(): Promise<RoomListItem[]> {
     const res = await this.get('/rooms')
     if (res.status !== 200) throw new ApiError(res)
-    return res.arr
+    return res.array
   }
 
   async getRoom(roomId: number): Promise<Room> {

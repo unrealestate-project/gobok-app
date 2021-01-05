@@ -1,12 +1,12 @@
 import React, { useRef } from 'react'
-import { Alert, Text, TextInput, View } from 'react-native'
+import { Text, TextInput, View } from 'react-native'
 import { COLORS } from 'infra/Colors'
 import { HeaderText } from 'component/HeaderText'
 import { LdTextInput } from 'component/LdTextInput'
 import { LdButton } from 'component/LdButton'
 import { LdKeyboardAvoidingView } from 'component/LdKeyboardAvoidingView'
 import { userStore } from 'store/UserStore'
-import { toast } from 'infra/Util'
+import { showError, toast } from 'infra/Util'
 import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 
@@ -102,7 +102,7 @@ export const LoginScreen = observer(() => {
                   toast('인증코드가 이메일로 전송되었습니다!')
                   await userStore.getAuthCode(store.current.email)
                 } catch (e) {
-                  Alert.alert('오류', e.message)
+                  showError(e.message)
                   store.current.clearInterval()
                 }
               }}
@@ -130,7 +130,7 @@ export const LoginScreen = observer(() => {
                   store.current.loginDisabled = true
                   await userStore.login(email, code)
                 } catch (e) {
-                  Alert.alert('오류', e.message)
+                  showError(e.message)
                 } finally {
                   store.current.loginDisabled = false
                 }

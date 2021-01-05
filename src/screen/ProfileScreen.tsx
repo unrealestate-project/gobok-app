@@ -47,7 +47,7 @@ export const ProfileScreen = () => {
         <Title>앱 개선사항 제안</Title>
         <Image source={ARROW_RIGHT} />
       </MenuItemContainer>
-      <MenuItemContainer>
+      <MenuItemContainer onPress={() => userStore.logout()}>
         <Title style={{ color: COLORS.primary500 }}>로그아웃</Title>
         <Image source={ARROW_RIGHT_PRIMARY} />
       </MenuItemContainer>

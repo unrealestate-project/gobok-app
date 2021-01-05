@@ -47,6 +47,7 @@ class UserStore {
 
   @action async logout() {
     this.token = null
+    AsyncStorage.removeItem('user:token')
   }
 }
 

@@ -4,6 +4,7 @@ export interface User {
 }
 
 export interface RoomListItem {
+  id: number
   title: string
   thumb_img: string
   view_count: number
@@ -11,6 +12,7 @@ export interface RoomListItem {
 }
 
 export interface Room {
+  id: number
   title: string
   content: string
   images: string[]
