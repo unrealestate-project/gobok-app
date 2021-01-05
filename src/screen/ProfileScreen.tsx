@@ -6,7 +6,7 @@ import { ARROW_RIGHT, ARROW_RIGHT_PRIMARY, PROFILE_PLACEHOLDER } from 'image'
 import { userStore } from 'store/UserStore'
 
 const Title = styled.Text`
-  font-size: 20px;
+  font-size: 18px;
   color: ${COLORS.gray0};
 `
 
@@ -15,7 +15,7 @@ const MenuItemContainer = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 16px 28px 32px;
+  padding: 24px 20px 24px 32px;
 `
 
 export const ProfileScreen = () => {
