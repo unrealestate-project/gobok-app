@@ -1,6 +1,7 @@
 import { SERVER_BASE_URL } from 'infra/Constants'
 import { AuthError, ServiceError } from './ApiError'
-import { userStore } from 'store/UserStore'
+import { events } from 'infra/Events'
+import { EventType } from 'infra/Types'
 
 let token: string | null = null
 export const setToken = (t: string | null) => {
@@ -29,7 +30,7 @@ export class BaseApi {
       headers: this.commonHeaders,
     })
     if (res.status === 401) {
-      await userStore.logout()
+      events.emit(EventType.AUTH_ERROR)
       throw new AuthError()
     }
     if (res.status === 500) throw new ServiceError()

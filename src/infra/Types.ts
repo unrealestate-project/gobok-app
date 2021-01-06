@@ -21,3 +21,7 @@ export interface Room {
   view_count: number
   bumped_at: string
 }
+
+export enum EventType {
+  AUTH_ERROR = 'auth_error',
+}

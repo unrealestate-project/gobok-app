@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, View } from 'react-native'
+import { Alert, Image, View } from 'react-native'
 import styled from 'styled-components/native'
 import { COLORS } from 'infra/Colors'
 import { ARROW_RIGHT, ARROW_RIGHT_PRIMARY, PROFILE_PLACEHOLDER } from 'image'
@@ -47,7 +47,21 @@ export const ProfileScreen = () => {
         <Title>앱 개선사항 제안</Title>
         <Image source={ARROW_RIGHT} />
       </MenuItemContainer>
-      <MenuItemContainer onPress={() => userStore.logout()}>
+      <MenuItemContainer
+        onPress={() => {
+          Alert.alert(
+            '로그아웃',
+            '정말 로그아웃할까요?',
+            [
+              { text: '취소' },
+              { text: '로그아웃', onPress: () => userStore.logout() },
+            ],
+            {
+              cancelable: true,
+            },
+          )
+        }}
+      >
         <Title style={{ color: COLORS.primary500 }}>로그아웃</Title>
         <Image source={ARROW_RIGHT_PRIMARY} />
       </MenuItemContainer>

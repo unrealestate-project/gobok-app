@@ -37,6 +37,18 @@ class LoginStore {
 export const LoginScreen = observer(() => {
   const store = useRef<LoginStore>(new LoginStore())
   const codeInputRef = useRef<TextInput>(null)
+  const login = async () => {
+    if (store.current.code.length === 0) return
+    try {
+      const { email, code } = store.current
+      store.current.loginDisabled = true
+      await userStore.login(email, code)
+    } catch (e) {
+      showError(e.message)
+    } finally {
+      store.current.loginDisabled = false
+    }
+  }
   return (
     <LdKeyboardAvoidingView>
       <View
@@ -120,21 +132,11 @@ export const LoginScreen = observer(() => {
               onChangeText={(v) => {
                 store.current.code = v
               }}
+              onSubmitEditing={login}
             />
             <LdButton
               title='로그인'
-              onClick={async () => {
-                if (store.current.code.length === 0) return
-                try {
-                  const { email, code } = store.current
-                  store.current.loginDisabled = true
-                  await userStore.login(email, code)
-                } catch (e) {
-                  showError(e.message)
-                } finally {
-                  store.current.loginDisabled = false
-                }
-              }}
+              onClick={login}
               disabled={store.current.loginDisabled}
             />
           </View>

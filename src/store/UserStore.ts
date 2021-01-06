@@ -1,16 +1,14 @@
-import { action, computed, observable, reaction } from 'mobx'
+import { action, computed, observable } from 'mobx'
 import jwtDecode from 'jwt-decode'
-import { User } from 'infra/Types'
-import { setToken } from 'api/BaseApi'
+import { EventType, User } from 'infra/Types'
+import { setToken as _setToken } from 'api/BaseApi'
 import { userApi } from 'api/UserApi'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { events } from 'infra/Events'
 
 class UserStore {
   constructor() {
-    reaction(
-      () => this.token,
-      (v) => setToken(v),
-    )
+    events.on(EventType.AUTH_ERROR, () => this.logout())
   }
 
   @observable loading: boolean = true
@@ -30,9 +28,15 @@ class UserStore {
     await userApi.getCode(this.emailWithKoreaUniv(email))
   }
 
+  @action setToken(token: string | null) {
+    _setToken(token)
+    this.token = token
+  }
+
   @action async load() {
     try {
-      this.token = await AsyncStorage.getItem('user:token')
+      const res = await AsyncStorage.getItem('user:token')
+      if (res) this.setToken(res)
     } finally {
       this.loading = false
     }
@@ -41,12 +45,12 @@ class UserStore {
   @action async login(email: string, code: string) {
     const res = await userApi.login(this.emailWithKoreaUniv(email), code)
     if (!res) return
-    this.token = res
+    this.setToken(res)
     AsyncStorage.setItem('user:token', res)
   }
 
   @action async logout() {
-    this.token = null
+    this.setToken(null)
     AsyncStorage.removeItem('user:token')
   }
 }

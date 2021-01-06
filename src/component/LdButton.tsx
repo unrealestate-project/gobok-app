@@ -26,7 +26,12 @@ export const LdButton: React.FC<{
   textStyle?: StyleProp<TextStyle>
 }> = ({ title, onClick, disabled = false, style, textStyle }) => {
   return (
-    <ButtonContainer onPress={onClick} disabled={disabled} style={style}>
+    <ButtonContainer
+      onPress={onClick}
+      disabled={disabled}
+      style={style}
+      activeOpacity={0.8}
+    >
       <ButtonText style={textStyle}>{title}</ButtonText>
     </ButtonContainer>
   )
