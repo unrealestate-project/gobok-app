@@ -14,3 +14,9 @@ export class ServiceError extends Error {
     )
   }
 }
+
+export class AuthError extends Error {
+  constructor() {
+    super('로그인 정보가 없습니다!')
+  }
+}

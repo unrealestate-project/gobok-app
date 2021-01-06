@@ -64,3 +64,6 @@ buck-out/
 
 # Srcmap Bundle for Bugsnag
 bundle/
+
+# android profiling
+android/*.hprof
