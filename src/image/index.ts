@@ -17,3 +17,4 @@ export const getBottomTabIcon = (route: string, focused: boolean) => {
 export const PROFILE_PLACEHOLDER = require('./profile.png')
 export const ARROW_RIGHT = require('./arrow-right.png')
 export const ARROW_RIGHT_PRIMARY = require('./arrow-right-primary.png')
+export const ARROW_BACK = require('./arrow-back.png')

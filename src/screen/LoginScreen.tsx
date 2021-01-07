@@ -104,7 +104,7 @@ export const LoginScreen = observer(() => {
                   ? `${store.current.time}초`
                   : '코드 받기'
               }
-              onClick={async () => {
+              onPress={async () => {
                 if (store.current.email.length === 0) return
                 try {
                   store.current.codeDisabled = true
@@ -136,7 +136,7 @@ export const LoginScreen = observer(() => {
             />
             <LdButton
               title='로그인'
-              onClick={login}
+              onPress={login}
               disabled={store.current.loginDisabled}
             />
           </View>

@@ -4,6 +4,7 @@ import styled from 'styled-components/native'
 import { COLORS } from 'infra/Colors'
 import { ARROW_RIGHT, ARROW_RIGHT_PRIMARY, PROFILE_PLACEHOLDER } from 'image'
 import { userStore } from 'store/UserStore'
+import { NavigationHeader } from 'component/NavigationHeader'
 
 const Title = styled.Text`
   font-size: 18px;
@@ -26,18 +27,18 @@ export const ProfileScreen = () => {
         backgroundColor: COLORS.gray3,
       }}
     >
+      <NavigationHeader title='프로필' />
       <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
           paddingHorizontal: 24,
-          paddingVertical: 16,
+          paddingVertical: 32,
           marginBottom: 36,
           backgroundColor: COLORS.white,
         }}
       >
-        <Image source={PROFILE_PLACEHOLDER} style={{ marginRight: 16 }} />
-        <Title>{userStore.user?.email}</Title>
+        <Title style={{ fontWeight: 'bold' }}>{userStore.user?.email}</Title>
       </View>
       <MenuItemContainer>
         <Title>내가 올린 방</Title>

@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { ProfileStackNavigator } from 'navigation/ProfileStackNavigator'
-import { RoomStackNavigator } from 'navigation/RoomStackNavigator'
 import { NavigationContainer } from '@react-navigation/native'
-import { Image } from 'react-native'
-import { getBottomTabIcon } from 'image'
-import { COLORS } from 'infra/Colors'
 import { LdStatusBar } from 'component/LdStatusBar'
 import { userStore } from 'store/UserStore'
 import { LoginScreen } from 'screen/LoginScreen'
 import { Toast } from 'component/Toast'
 import { observer } from 'mobx-react'
+import { createStackNavigator } from '@react-navigation/stack'
+import { screenOptions } from 'navigation/Common'
+import { MyRoomScreen } from 'screen/MyRoomScreen'
+import { FeedbackScreen } from 'screen/FeedbackScreen'
+import { AddRoomScreen } from 'screen/AddRoomScreen'
+import { RoomScreen } from 'screen/RoomScreen'
+import { TabNavigator } from 'navigation/TabNavigator'
 
-const Tab = createBottomTabNavigator()
+const Stack = createStackNavigator()
 
 export const RootNavigator = observer(() => {
   useEffect(() => {
@@ -24,38 +25,13 @@ export const RootNavigator = observer(() => {
       {!userStore.loading && !userStore.hasToken ? (
         <LoginScreen />
       ) : (
-        <Tab.Navigator
-          tabBarOptions={{
-            style: { backgroundColor: COLORS.primary500 },
-            activeTintColor: COLORS.white,
-            inactiveTintColor: COLORS.primary300,
-          }}
-          screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused }) => {
-              return (
-                <Image
-                  style={{ width: 24, height: 24 }}
-                  source={getBottomTabIcon(route.name, focused)}
-                />
-              )
-            },
-          })}
-        >
-          <Tab.Screen
-            name='RoomTab'
-            component={RoomStackNavigator}
-            options={{
-              title: '복덕방',
-            }}
-          />
-          <Tab.Screen
-            name='ProfileTab'
-            component={ProfileStackNavigator}
-            options={{
-              title: '프로필',
-            }}
-          />
-        </Tab.Navigator>
+        <Stack.Navigator screenOptions={screenOptions}>
+          <Stack.Screen name='Main' component={TabNavigator} />
+          <Stack.Screen name='AddRoom' component={AddRoomScreen} />
+          <Stack.Screen name='Room' component={RoomScreen} />
+          <Stack.Screen name='MyRoom' component={MyRoomScreen} />
+          <Stack.Screen name='Feedback' component={FeedbackScreen} />
+        </Stack.Navigator>
       )}
       <Toast />
     </NavigationContainer>

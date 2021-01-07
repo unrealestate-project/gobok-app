@@ -20,14 +20,14 @@ const ButtonText = styled.Text`
 
 export const LdButton: React.FC<{
   title: string
-  onClick: () => void
+  onPress: () => void
   disabled?: boolean
   style?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
-}> = ({ title, onClick, disabled = false, style, textStyle }) => {
+}> = ({ title, onPress, disabled = false, style, textStyle }) => {
   return (
     <ButtonContainer
-      onPress={onClick}
+      onPress={onPress}
       disabled={disabled}
       style={style}
       activeOpacity={0.8}

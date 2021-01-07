@@ -1,10 +1,8 @@
-import { COLORS } from 'infra/Colors'
+import { TransitionPresets } from '@react-navigation/stack'
 
-export const headerStyle = {
-  headerTitleStyle: {
-    color: COLORS.white,
-  },
-  headerStyle: {
-    backgroundColor: COLORS.primary500,
-  },
+export const screenOptions = () => {
+  return {
+    ...TransitionPresets.SlideFromRightIOS,
+    headerShown: false,
+  }
 }
