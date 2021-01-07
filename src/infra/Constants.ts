@@ -8,3 +8,4 @@ export const isIOS = Platform.OS === 'ios'
 export const isAOS = Platform.OS === 'android'
 export const WINDOW_WIDTH = Dimensions.get('window').width
 export const WINDOW_HEIGHT = Dimensions.get('window').height
+export const IMAGE_SIDE = WINDOW_WIDTH / 3

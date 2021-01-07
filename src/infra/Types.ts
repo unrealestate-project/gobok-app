@@ -6,18 +6,24 @@ export interface User {
 export interface RoomListItem {
   id: number
   title: string
-  thumb_img: string
+  thumbnail: {
+    url: string
+  }
   view_count: number
   bumped_at: string
+}
+
+export interface RoomImage {
+  id: number
+  url: string
 }
 
 export interface Room {
   id: number
   title: string
   content: string
-  images: string[]
-  user_id: number
-  user_nickname: string
+  images: RoomImage[]
+  nickname: string
   view_count: number
   bumped_at: string
 }
