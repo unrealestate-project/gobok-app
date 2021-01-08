@@ -13,6 +13,7 @@ import { BottomRoomActionButtons } from 'component/BottomRoomActionButtons'
 import { ScreenSpinner } from 'component/ScreenSpinner'
 import { CLOSE_ICON } from 'image'
 import ImageViewer from 'react-native-image-zoom-viewer'
+import Autolink from 'react-native-autolink'
 
 const Title = styled.Text`
   font-size: 26px;
@@ -25,6 +26,7 @@ const InfoText = styled.Text`
 
 const MainText = styled.Text`
   font-size: 16px;
+  line-height: 24px;
 `
 
 const RoomImage = styled.Image`
@@ -99,7 +101,7 @@ export const RoomItemScreen = () => {
               </ScrollView>
             </View>
             {/*post section*/}
-            <View style={{ padding: 24 }}>
+            <View style={{ paddingHorizontal: 16, paddingVertical: 24 }}>
               <Title>{data.title}</Title>
               <View>
                 <View
@@ -118,7 +120,17 @@ export const RoomItemScreen = () => {
                   </View>
                   <InfoText>{moment(data.bumped_at).calendar()}</InfoText>
                 </View>
-                <MainText>{data.content}</MainText>
+                <Autolink
+                  text={data.content}
+                  component={MainText}
+                  email
+                  phone
+                  url
+                  linkStyle={{
+                    textDecorationLine: 'underline',
+                    color: COLORS.primary500,
+                  }}
+                />
               </View>
             </View>
           </ScrollView>
