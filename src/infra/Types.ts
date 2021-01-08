@@ -26,6 +26,7 @@ export interface Room {
   nickname: string
   view_count: number
   bumped_at: string
+  is_mine: boolean
 }
 
 export enum EventType {
