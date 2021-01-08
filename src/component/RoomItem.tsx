@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { COLORS } from 'infra/Colors'
 import moment from 'moment'
+import { ITEM_PADDING } from 'infra/Constants'
 
 export const RoomItem: React.FC<{
   data: RoomListItem
@@ -13,24 +14,24 @@ export const RoomItem: React.FC<{
     <TouchableOpacity
       style={{
         flexDirection: 'row',
-        padding: 16,
+        padding: ITEM_PADDING,
         backgroundColor: COLORS.white,
+        borderTopWidth: 1,
+        borderTopColor: COLORS.gray3,
       }}
       onPress={() => navigation.navigate('RoomItem', { roomId: data.id })}
     >
       <Image
         source={{ uri: data.thumbnail.url }}
         style={{
-          width: 72,
-          height: 72,
+          width: 84,
+          height: 84,
           borderRadius: 8,
           marginRight: 16,
           backgroundColor: COLORS.gray2,
         }}
       />
-      <View
-        style={{ flex: 1, justifyContent: 'space-between', paddingVertical: 6 }}
-      >
+      <View style={{ flex: 1, justifyContent: 'space-between' }}>
         <Text
           numberOfLines={2}
           style={{
