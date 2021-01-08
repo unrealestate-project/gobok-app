@@ -16,7 +16,7 @@ export const RoomItem: React.FC<{
         padding: 16,
         backgroundColor: COLORS.white,
       }}
-      onPress={() => navigation.navigate('Room', data)}
+      onPress={() => navigation.navigate('RoomItem', data)}
     >
       <Image
         source={{ uri: data.thumbnail.url }}

@@ -30,7 +30,7 @@ export const LdButton: React.FC<{
       onPress={onPress}
       disabled={disabled}
       style={style}
-      activeOpacity={0.8}
+      activeOpacity={0.6}
     >
       <ButtonText style={textStyle}>{title}</ButtonText>
     </ButtonContainer>

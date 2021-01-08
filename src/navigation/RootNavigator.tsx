@@ -10,7 +10,7 @@ import { screenOptions } from 'navigation/Common'
 import { MyRoomScreen } from 'screen/MyRoomScreen'
 import { FeedbackScreen } from 'screen/FeedbackScreen'
 import { AddRoomScreen } from 'screen/AddRoomScreen'
-import { RoomScreen } from 'screen/RoomScreen'
+import { RoomItemScreen } from 'screen/RoomItemScreen'
 import { TabNavigator } from 'navigation/TabNavigator'
 
 const Stack = createStackNavigator()
@@ -28,7 +28,7 @@ export const RootNavigator = observer(() => {
         <Stack.Navigator screenOptions={screenOptions}>
           <Stack.Screen name='Main' component={TabNavigator} />
           <Stack.Screen name='AddRoom' component={AddRoomScreen} />
-          <Stack.Screen name='Room' component={RoomScreen} />
+          <Stack.Screen name='RoomItem' component={RoomItemScreen} />
           <Stack.Screen name='MyRoom' component={MyRoomScreen} />
           <Stack.Screen name='Feedback' component={FeedbackScreen} />
         </Stack.Navigator>
