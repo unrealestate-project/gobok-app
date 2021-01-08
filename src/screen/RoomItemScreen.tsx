@@ -135,7 +135,11 @@ export const RoomItemScreen = () => {
             </View>
           </ScrollView>
         )}
-        <Modal visible={imageModal} transparent>
+        <Modal
+          visible={imageModal}
+          transparent
+          onRequestClose={() => setImageModal(false)}
+        >
           <TouchableOpacity
             style={{
               position: 'absolute',
@@ -156,6 +160,7 @@ export const RoomItemScreen = () => {
             onCancel={() => setImageModal(false)}
             enableSwipeDown
             index={imageIndex}
+            saveToLocalByLongPress={false}
           />
         </Modal>
         {loading && <ScreenSpinner />}
