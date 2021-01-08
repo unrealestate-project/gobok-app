@@ -51,10 +51,10 @@ class RoomApi extends BaseApi {
     if (res.status !== 200) throw new ApiError(res)
   }
 
-  async getOwnRoom(): Promise<Room> {
-    const res = await this.get('/my/room')
+  async getMyRoom(): Promise<Room | null> {
+    const res = await this.get('/my/rooms')
     if (res.status !== 200) throw new ApiError(res)
-    return res.data
+    return res.array.length > 0 ? res.array[0] : null
   }
 }
 

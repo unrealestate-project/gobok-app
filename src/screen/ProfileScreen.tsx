@@ -2,9 +2,10 @@ import React from 'react'
 import { Alert, Image, View } from 'react-native'
 import styled from 'styled-components/native'
 import { COLORS } from 'infra/Colors'
-import { ARROW_RIGHT, ARROW_RIGHT_PRIMARY, PROFILE_PLACEHOLDER } from 'image'
+import { ARROW_RIGHT, ARROW_RIGHT_PRIMARY } from 'image'
 import { userStore } from 'store/UserStore'
 import { NavigationHeader } from 'component/NavigationHeader'
+import { useNavigation } from '@react-navigation/native'
 
 const Title = styled.Text`
   font-size: 18px;
@@ -20,6 +21,7 @@ const MenuItemContainer = styled.TouchableOpacity`
 `
 
 export const ProfileScreen = () => {
+  const navigation = useNavigation()
   return (
     <View
       style={{
@@ -40,7 +42,7 @@ export const ProfileScreen = () => {
       >
         <Title style={{ fontWeight: 'bold' }}>{userStore.user?.email}</Title>
       </View>
-      <MenuItemContainer>
+      <MenuItemContainer onPress={() => navigation.navigate('RoomItem')}>
         <Title>내가 올린 방</Title>
         <Image source={ARROW_RIGHT} />
       </MenuItemContainer>
