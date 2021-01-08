@@ -15,7 +15,7 @@ export const PostRoomButton = () => {
       }}
     >
       <LdButton
-        title='방 올리기'
+        title='내 방 올리기'
         onPress={() => navigation.navigate('AddRoom')}
         style={{
           height: 56,
