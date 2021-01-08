@@ -46,7 +46,7 @@ export const ProfileScreen = () => {
         <Title>내가 올린 방</Title>
         <Image source={ARROW_RIGHT} />
       </MenuItemContainer>
-      <MenuItemContainer>
+      <MenuItemContainer onPress={() => navigation.navigate('Feedback')}>
         <Title>앱 개선사항 제안</Title>
         <Image source={ARROW_RIGHT} />
       </MenuItemContainer>

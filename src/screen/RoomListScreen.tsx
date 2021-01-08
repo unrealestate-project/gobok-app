@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList, RefreshControl, View } from 'react-native'
 import { COLORS } from 'infra/Colors'
 import { observer } from 'mobx-react'
 import { dataStore } from 'store/DataStore'
@@ -33,6 +33,12 @@ export const RoomListScreen = observer(() => {
         keyExtractor={(v) => `${v.id}`}
         refreshing={dataStore.loading}
         onRefresh={() => dataStore.updateRoomList()}
+        refreshControl={
+          <RefreshControl
+            refreshing={dataStore.loading}
+            colors={[COLORS.primary500]}
+          />
+        }
       />
       <PostRoomButton />
     </View>

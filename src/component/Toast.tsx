@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: '15%',
     alignSelf: 'center',
-    borderRadius: 30,
+    borderRadius: 8,
     backgroundColor: 'rgba(0,0,0,0.6)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -77,5 +77,7 @@ const styles = StyleSheet.create({
   },
   toastText: {
     color: COLORS.white,
+    fontSize: 14,
+    lineHeight: 21,
   },
 })

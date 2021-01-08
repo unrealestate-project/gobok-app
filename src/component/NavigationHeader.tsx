@@ -20,14 +20,14 @@ const BackButton = () => {
       style={{ position: 'absolute', left: 16 }}
       onPress={() => navigation.goBack()}
     >
-      <Image source={ARROW_BACK} style={{ width: 32, height: 32 }} />
+      <Image source={ARROW_BACK} style={{ width: 28, height: 28 }} />
     </TouchableOpacity>
   )
 }
 
 const Text = styled.Text`
   color: ${COLORS.white};
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
 `
 

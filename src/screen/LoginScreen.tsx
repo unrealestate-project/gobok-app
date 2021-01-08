@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { Text, TextInput, View } from 'react-native'
 import { COLORS } from 'infra/Colors'
 import { HeaderText } from 'component/HeaderText'
-import { LdTextInput } from 'component/LdTextInput'
+import { LdTextInputFill } from 'component/LdTextInput'
 import { LdButton } from 'component/LdButton'
 import { LdKeyboardAvoidingView } from 'component/LdKeyboardAvoidingView'
 import { userStore } from 'store/UserStore'
@@ -72,7 +72,7 @@ export const LoginScreen = observer(() => {
             <View
               style={{ position: 'relative', flexDirection: 'row', flex: 1 }}
             >
-              <LdTextInput
+              <LdTextInputFill
                 placeholderTextColor={COLORS.gray2}
                 placeholder='아이디'
                 style={{ marginRight: 8, paddingRight: 116 }}
@@ -122,7 +122,7 @@ export const LoginScreen = observer(() => {
             />
           </View>
           <View style={{ flexDirection: 'row' }}>
-            <LdTextInput
+            <LdTextInputFill
               ref={codeInputRef}
               placeholderTextColor={COLORS.gray2}
               placeholder='인증코드'
@@ -137,6 +137,7 @@ export const LoginScreen = observer(() => {
             <LdButton
               title='로그인'
               onPress={login}
+              loading={store.current.loginDisabled}
               disabled={store.current.loginDisabled}
             />
           </View>
