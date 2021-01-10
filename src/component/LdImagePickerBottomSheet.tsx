@@ -4,8 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components/native'
 import { CAMERA_ICON, GALLERY_ICON } from 'image'
 import { COLORS } from 'infra/Colors'
-// @ts-ignore
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker'
+import ImagePicker from 'react-native-image-crop-picker'
 
 const Container = styled.TouchableOpacity`
   height: 54px;
@@ -22,8 +21,8 @@ const ItemText = styled.Text`
 export const LdImagePickerBottomSheet: React.FC<{
   isOpen: boolean
   onClose: () => void
-  onImage: (image: string) => void
-}> = ({ isOpen, onClose, onImage }) => {
+  onImages: (images: string[]) => void
+}> = ({ isOpen, onClose, onImages }) => {
   const ref = useRef<RBSheet>(null)
   useEffect(() => {
     if (isOpen) ref.current?.open()
@@ -34,9 +33,14 @@ export const LdImagePickerBottomSheet: React.FC<{
       <View style={{ flex: 1, padding: 16 }}>
         <Container
           onPress={() => {
-            launchImageLibrary({ mediaType: 'photo' }, (res: any) => {
-              if (res.uri) onImage(res.uri)
+            ImagePicker.openPicker({
+              mediaType: 'photo',
+              multiple: true,
             })
+              .then((images) => {
+                onImages(images.map((i) => i.path))
+              })
+              .catch(() => {})
           }}
         >
           <Image source={GALLERY_ICON} />
@@ -44,9 +48,13 @@ export const LdImagePickerBottomSheet: React.FC<{
         </Container>
         <Container
           onPress={() => {
-            launchCamera({ mediaType: 'photo' }, (res: any) => {
-              if (res.uri) onImage(res.uri)
+            ImagePicker.openCamera({
+              mediaType: 'photo',
             })
+              .then((image) => {
+                onImages([image.path])
+              })
+              .catch(() => {})
           }}
         >
           <Image source={CAMERA_ICON} />

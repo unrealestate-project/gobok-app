@@ -134,6 +134,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode Integer.parseInt(APP_VERSION_CODE)
         versionName APP_VERSION_NAME
+        vectorDrawables.useSupportLibrary = true
     }
     splits {
         abi {

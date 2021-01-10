@@ -17,8 +17,8 @@ class AddRoomStore {
   @observable images: string[] = []
   @observable loading: boolean = false
 
-  @action addImage(image: string) {
-    this.images.push(image)
+  @action addImages(images: string[]) {
+    this.images = this.images.concat(images)
   }
 
   @action removeImage(index: number) {
@@ -113,8 +113,8 @@ export const AddRoomScreen = observer(() => {
         onClose={() => {
           setBottomSheet(false)
         }}
-        onImage={(image) => {
-          store.current.addImage(image)
+        onImages={(images) => {
+          store.current.addImages(images)
           setBottomSheet(false)
         }}
       />
