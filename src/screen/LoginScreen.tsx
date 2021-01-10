@@ -119,6 +119,7 @@ export const LoginScreen = observer(() => {
                 }
               }}
               disabled={store.current.codeDisabled}
+              style={{ width: 80 }}
             />
           </View>
           <View style={{ flexDirection: 'row' }}>
@@ -139,6 +140,7 @@ export const LoginScreen = observer(() => {
               onPress={login}
               loading={store.current.loginDisabled}
               disabled={store.current.loginDisabled}
+              style={{ width: 80 }}
             />
           </View>
         </View>

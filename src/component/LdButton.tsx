@@ -7,13 +7,13 @@ import {
   TextStyle,
   ViewStyle,
 } from 'react-native'
+import { ACTIVE_OPACITY } from 'infra/Constants'
 
 const ButtonContainer = styled.TouchableOpacity`
   background-color: ${(props: { disabled: boolean }) =>
     props.disabled ? COLORS.gray1 : COLORS.gray2};
   justify-content: center;
   align-items: center;
-  width: 80px;
   border-radius: 8px;
 `
 
@@ -43,7 +43,7 @@ export const LdButton: React.FC<{
       onPress={onPress}
       disabled={disabled}
       style={style}
-      activeOpacity={0.6}
+      activeOpacity={ACTIVE_OPACITY}
     >
       {loading ? (
         <ActivityIndicator size={24} color={COLORS.primary500} />

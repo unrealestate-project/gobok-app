@@ -23,52 +23,46 @@ export const FeedbackScreen = () => {
             flex: 1,
             position: 'relative',
             backgroundColor: COLORS.white,
+            padding: 16,
           }}
         >
-          <View style={{ flex: 1, padding: 16, paddingBottom: 0 }}>
-            <LdTextInputBorder
-              placeholder='제목'
-              placeholderTextColor={COLORS.gray2}
-              style={{ marginBottom: 16 }}
-              value={title}
-              onChangeText={(v) => setTitle(v)}
-            />
-            <LdTextInputBorder
-              placeholder='내용'
-              placeholderTextColor={COLORS.gray2}
-              style={{ flex: 1 }}
-              value={content}
-              onChangeText={(v) => setContent(v)}
-              multiline
-              textAlignVertical='top'
-            />
-          </View>
-          <View style={{ width: '100%', padding: 16 }}>
-            <LdButton
-              title='보내기'
-              onPress={() => {
-                if (!title.trim().length || !content.trim().length) return
-                setLoading(true)
-                userApi
-                  .feedback(title, content)
-                  .then(() => {
-                    toast(
-                      '피드백 주셔서 감사합니다 :)\n더 편리한 서비스 만들기 위해 최선을 다할게요!',
-                    )
-                    navigation.goBack()
-                  })
-                  .catch((e) => showError(e))
-                  .finally(() => setLoading(false))
-              }}
-              style={{
-                height: 56,
-                width: '100%',
-              }}
-              textStyle={{ fontSize: 16 }}
-              loading={loading}
-              disabled={loading}
-            />
-          </View>
+          <LdTextInputBorder
+            placeholder='제목'
+            placeholderTextColor={COLORS.gray1}
+            style={{ marginBottom: 16 }}
+            value={title}
+            onChangeText={(v) => setTitle(v)}
+          />
+          <LdTextInputBorder
+            placeholder='내용'
+            placeholderTextColor={COLORS.gray1}
+            style={{ flex: 1, marginBottom: 16 }}
+            value={content}
+            onChangeText={(v) => setContent(v)}
+            multiline
+            textAlignVertical='top'
+          />
+          <LdButton
+            title='보내기'
+            onPress={() => {
+              if (!title.trim().length || !content.trim().length) return
+              setLoading(true)
+              userApi
+                .feedback(title, content)
+                .then(() => {
+                  toast(
+                    '피드백 주셔서 감사합니다 :)\n더 편리한 서비스 만들기 위해 최선을 다할게요!',
+                  )
+                  navigation.goBack()
+                })
+                .catch((e) => showError(e))
+                .finally(() => setLoading(false))
+            }}
+            style={{ height: 56 }}
+            textStyle={{ fontSize: 16 }}
+            loading={loading}
+            disabled={loading}
+          />
         </View>
       </LdKeyboardAvoidingView>
     </>

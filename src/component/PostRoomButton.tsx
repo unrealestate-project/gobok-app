@@ -18,8 +18,6 @@ export const PostRoomButton = () => {
         title='내 방 올리기'
         onPress={() => navigation.navigate('AddRoom')}
         style={{
-          height: 56,
-          width: 100,
           shadowColor: COLORS.black,
           shadowOffset: {
             width: 1,
@@ -28,6 +26,7 @@ export const PostRoomButton = () => {
           shadowRadius: 2,
           shadowOpacity: 0.25,
           elevation: 4,
+          padding: 16,
         }}
         textStyle={{
           fontSize: 16,
