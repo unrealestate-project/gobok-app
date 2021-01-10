@@ -76,7 +76,9 @@ export const LoginScreen = observer(() => {
                 placeholderTextColor={COLORS.gray2}
                 placeholder='아이디'
                 style={{ marginRight: 8, paddingRight: 116 }}
-                keyboardType='email-address'
+                keyboardType='default'
+                autoCompleteType='username'
+                textContentType='username'
                 value={store.current.email}
                 onChangeText={(v) => {
                   store.current.email = v
