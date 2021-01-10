@@ -34,9 +34,8 @@ export const ProfileScreen = () => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          paddingHorizontal: 24,
-          paddingVertical: 32,
-          marginBottom: 36,
+          padding: 32,
+          marginBottom: 32,
           backgroundColor: COLORS.white,
         }}
       >

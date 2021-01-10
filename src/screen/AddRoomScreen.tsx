@@ -1,23 +1,49 @@
-import React, { useRef } from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import React, { useRef, useState } from 'react'
+import { Alert, ScrollView, Text, View } from 'react-native'
 import { NavigationHeader } from 'component/NavigationHeader'
 import { LdTextInputBorder } from 'component/LdTextInput'
 import { COLORS } from 'infra/Colors'
-import { observable } from 'mobx'
+import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import { LdKeyboardAvoidingView } from 'component/LdKeyboardAvoidingView'
 import { AddRoomImageButton } from 'component/AddRoomImageButton'
 import { LdButton } from 'component/LdButton'
+import { LdImagePickerBottomSheet } from 'component/LdImagePickerBottomSheet'
+import { AddRoomImage } from 'component/AddRoomImage'
 
 class AddRoomStore {
   @observable title: string = ''
   @observable content: string = ''
   @observable images: string[] = []
   @observable loading: boolean = false
+
+  @action addImage(image: string) {
+    this.images.push(image)
+  }
+
+  @action removeImage(index: number) {
+    Alert.alert(
+      '사진 삭제',
+      '사진을 삭제할까요?',
+      [
+        { text: '취소' },
+        {
+          text: '삭제',
+          onPress: () => {
+            this.images.splice(index, 1)
+          },
+        },
+      ],
+      {
+        cancelable: true,
+      },
+    )
+  }
 }
 
 export const AddRoomScreen = observer(() => {
   const store = useRef(new AddRoomStore())
+  const [bottomSheet, setBottomSheet] = useState(false)
   return (
     <>
       <NavigationHeader title='내 방 올리기' showBackButton />
@@ -51,11 +77,19 @@ export const AddRoomScreen = observer(() => {
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'space-between',
               marginBottom: 16,
+              flexWrap: 'wrap',
             }}
           >
-            <AddRoomImageButton onPress={() => {}} />
+            <AddRoomImageButton onPress={() => setBottomSheet(true)} />
+            {store.current.images.map((img, index) => (
+              <AddRoomImage
+                image={img}
+                key={img}
+                index={index}
+                onPress={() => store.current.removeImage(index)}
+              />
+            ))}
           </View>
           <View>
             <Text style={{ color: COLORS.gray1 }}>
@@ -74,6 +108,16 @@ export const AddRoomScreen = observer(() => {
           </View>
         </ScrollView>
       </LdKeyboardAvoidingView>
+      <LdImagePickerBottomSheet
+        isOpen={bottomSheet}
+        onClose={() => {
+          setBottomSheet(false)
+        }}
+        onImage={(image) => {
+          store.current.addImage(image)
+          setBottomSheet(false)
+        }}
+      />
     </>
   )
 })

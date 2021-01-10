@@ -17,6 +17,7 @@ export const AddRoomImageButton: React.FC<{
           alignItems: 'center',
           borderWidth: 1,
           borderColor: COLORS.gray2,
+          marginRight: 16,
         }}
       >
         <Text
