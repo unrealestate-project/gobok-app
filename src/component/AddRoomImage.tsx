@@ -1,6 +1,6 @@
 import React from 'react'
 import { Image, Text, TouchableOpacity } from 'react-native'
-import { ADD_IMAGE_SIDE } from 'infra/Constants'
+import { ACTIVE_OPACITY, ADD_IMAGE_SIDE } from 'infra/Constants'
 import { COLORS } from 'infra/Colors'
 import styled from 'styled-components/native'
 
@@ -31,6 +31,7 @@ export const AddRoomImage: React.FC<{
         marginTop: index > 1 ? 16 : 0,
       }}
       onPress={onPress}
+      activeOpacity={ACTIVE_OPACITY}
     >
       <Image
         source={{ uri: image }}
