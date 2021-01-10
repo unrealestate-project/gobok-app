@@ -92,7 +92,7 @@ export const AddRoomScreen = observer(() => {
                 dataStore.updateRoomList()
               }
             }}
-            style={{ height: 56 }}
+            style={{ paddingVertical: 16 }}
             textStyle={{ fontSize: 16 }}
             loading={store.current.loading}
             disabled={store.current.loading}

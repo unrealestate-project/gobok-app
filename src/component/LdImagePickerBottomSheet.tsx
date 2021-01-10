@@ -9,7 +9,7 @@ import ImagePicker, {
 } from 'react-native-image-crop-picker'
 
 const Container = styled.TouchableOpacity`
-  height: 54px;
+  height: 56px;
   align-items: center;
   flex-direction: row;
 `
@@ -31,7 +31,7 @@ export const LdImagePickerBottomSheet: React.FC<{
     else ref.current?.close()
   }, [isOpen])
   return (
-    <RBSheet ref={ref} height={140} onClose={onClose}>
+    <RBSheet ref={ref} height={144} onClose={onClose}>
       <View style={{ flex: 1, padding: 16 }}>
         <Container
           onPress={() => {

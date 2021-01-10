@@ -58,7 +58,7 @@ export const FeedbackScreen = () => {
                 .catch((e) => showError(e))
                 .finally(() => setLoading(false))
             }}
-            style={{ height: 56 }}
+            style={{ paddingVertical: 16 }}
             textStyle={{ fontSize: 16 }}
             loading={loading}
             disabled={loading}

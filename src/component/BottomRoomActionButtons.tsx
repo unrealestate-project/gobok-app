@@ -16,7 +16,6 @@ export const BottomRoomActionButtons: React.FC<{
       style={{
         width: '100%',
         flexDirection: 'row',
-        height: 72,
         paddingHorizontal: 8,
         paddingVertical: 8,
       }}
@@ -24,7 +23,7 @@ export const BottomRoomActionButtons: React.FC<{
       <LdButton
         title='끌올'
         onPress={() => store.bump()}
-        style={{ flex: 1 }}
+        style={{ flex: 1, paddingVertical: 16 }}
         textStyle={{ fontSize: 16 }}
         loading={store.bumpLoading}
         disabled={store.bumpLoading}
@@ -34,7 +33,7 @@ export const BottomRoomActionButtons: React.FC<{
         onPress={() => {
           navigation.navigate('AddRoom', { roomData: toJS(store.data) })
         }}
-        style={{ flex: 1, marginLeft: 8 }}
+        style={{ flex: 1, marginLeft: 8, paddingVertical: 16 }}
         textStyle={{ fontSize: 16 }}
       />
       <LdButton
@@ -60,7 +59,7 @@ export const BottomRoomActionButtons: React.FC<{
             },
           )
         }}
-        style={{ flex: 1, marginLeft: 8 }}
+        style={{ flex: 1, marginLeft: 8, paddingVertical: 16 }}
         textStyle={{ fontSize: 16 }}
         loading={store.deleteLoading}
         disabled={store.deleteLoading}
