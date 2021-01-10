@@ -46,7 +46,7 @@ export const LdButton: React.FC<{
       activeOpacity={ACTIVE_OPACITY}
     >
       {loading ? (
-        <ActivityIndicator size={24} color={COLORS.primary500} />
+        <ActivityIndicator size={22} color={COLORS.primary500} />
       ) : (
         <ButtonText style={textStyle}>{title}</ButtonText>
       )}
