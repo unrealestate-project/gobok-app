@@ -17,4 +17,5 @@ export const LdTextInputBorder = styled.TextInput`
   border-radius: 8px;
   padding: 16px;
   font-size: 16px;
+  line-height: 24px;
 `
