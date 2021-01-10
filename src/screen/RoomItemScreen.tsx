@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Image, Modal, ScrollView, TouchableOpacity, View } from 'react-native'
 import { NavigationHeader } from 'component/NavigationHeader'
-import { useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import styled from 'styled-components/native'
 import { COLORS } from 'infra/Colors'
 import moment from 'moment'
@@ -34,6 +34,7 @@ const RoomImage = styled.Image`
 `
 
 export const RoomItemScreen = observer(() => {
+  const navigation = useNavigation()
   const route = useRoute()
   const { roomId } = route.params
     ? (route.params as { roomId?: number })
@@ -44,7 +45,9 @@ export const RoomItemScreen = observer(() => {
   const [imageModal, setImageModal] = useState(false)
 
   useEffect(() => {
-    store.current.updateData(roomId)
+    store.current.updateData(roomId).then((res) => {
+      if (res === null) navigation.goBack()
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
