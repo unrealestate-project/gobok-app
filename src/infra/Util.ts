@@ -3,6 +3,6 @@ import { Alert } from 'react-native'
 
 export const toast = Toast.show
 
-export const showError = (error: string) => {
-  Alert.alert('오류', error)
+export const showError = (error: string | Error) => {
+  Alert.alert('오류', error instanceof Error ? error.message : error)
 }

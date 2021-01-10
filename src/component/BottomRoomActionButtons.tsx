@@ -1,38 +1,41 @@
 import { LdButton } from 'component/LdButton'
-import { roomApi } from 'api/RoomApi'
-import { showError, toast } from 'infra/Util'
 import { Alert, View } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { RoomItemStore } from 'store/RoomItemStore'
+import { observer } from 'mobx-react'
+import { toJS } from 'mobx'
+import { dataStore } from 'store/DataStore'
 
 export const BottomRoomActionButtons: React.FC<{
-  roomId: number
-}> = ({ roomId }) => {
+  store: RoomItemStore
+}> = observer(({ store }) => {
+  const navigation = useNavigation()
   return (
     <View
       style={{
         width: '100%',
         flexDirection: 'row',
-        height: 80,
+        height: 72,
         paddingHorizontal: 8,
         paddingVertical: 8,
       }}
     >
       <LdButton
         title='끌올'
-        onPress={() => {
-          roomApi
-            .bumpRoom(roomId)
-            .then(() => {
-              toast('방이 끌올되었어요!')
-            })
-            .catch((e) => showError(e))
-        }}
+        onPress={() => store.bump()}
         style={{ flex: 1 }}
+        textStyle={{ fontSize: 16 }}
+        loading={store.bumpLoading}
+        disabled={store.bumpLoading}
       />
       <LdButton
         title='수정'
-        onPress={() => {}}
+        onPress={() => {
+          navigation.navigate('AddRoom', { roomData: toJS(store.data) })
+        }}
         style={{ flex: 1, marginLeft: 8 }}
+        textStyle={{ fontSize: 16 }}
       />
       <LdButton
         title='삭제'
@@ -45,12 +48,10 @@ export const BottomRoomActionButtons: React.FC<{
               {
                 text: '삭제',
                 onPress: () => {
-                  roomApi
-                    .deleteRoom(roomId)
-                    .then(() => {
-                      toast('방이 삭제되었어요!')
-                    })
-                    .catch((e) => showError(e))
+                  store.delete(() => {
+                    navigation.goBack()
+                    dataStore.updateRoomList()
+                  })
                 },
               },
             ],
@@ -60,7 +61,10 @@ export const BottomRoomActionButtons: React.FC<{
           )
         }}
         style={{ flex: 1, marginLeft: 8 }}
+        textStyle={{ fontSize: 16 }}
+        loading={store.deleteLoading}
+        disabled={store.deleteLoading}
       />
     </View>
   )
-}
+})

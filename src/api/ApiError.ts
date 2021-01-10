@@ -2,7 +2,7 @@ import { NetworkMessage } from './BaseApi'
 
 export class ApiError extends Error {
   constructor(res: NetworkMessage) {
-    super(`[${res.status}] ${res.detail}`)
+    super(`${res.detail ? res.detail : res.status}`)
     this.name = 'ApiError'
   }
 }

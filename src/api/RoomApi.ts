@@ -1,6 +1,6 @@
 import { BaseApi } from 'api/BaseApi'
 import { ApiError } from 'api/ApiError'
-import { Room, RoomListItem } from 'infra/Types'
+import { Room, RoomImage, RoomListItem } from 'infra/Types'
 
 class RoomApi extends BaseApi {
   async getRooms(): Promise<RoomListItem[]> {
@@ -15,16 +15,25 @@ class RoomApi extends BaseApi {
     return res.data
   }
 
-  async postRoom(title: string, content: string, images: [{ url: string }]) {
+  async postRoom(
+    title: string,
+    content: string,
+    images: { url: string }[],
+  ): Promise<number> {
     const res = await this.post('/rooms', {
       title,
       content,
       images,
     })
     if (res.status !== 200) throw new ApiError(res)
+    return res.data.room_id
   }
 
-  async postRoomImage(image: Blob): Promise<string> {
+  async postRoomImage(image: {
+    uri: string
+    type: string
+    name: string
+  }): Promise<RoomImage> {
     const res = await this.postFormData('/rooms/images', {
       file: image,
     })
@@ -32,13 +41,18 @@ class RoomApi extends BaseApi {
     return res.data
   }
 
-  async putRoom(title: string, content: string, images: [{ url: string }]) {
+  async putRoom(
+    title: string,
+    content: string,
+    images: { url: string }[],
+  ): Promise<number> {
     const res = await this.put('/rooms', {
       title,
       content,
       images,
     })
     if (res.status !== 200) throw new ApiError(res)
+    return res.data.room_id
   }
 
   async deleteRoom(roomId: number) {

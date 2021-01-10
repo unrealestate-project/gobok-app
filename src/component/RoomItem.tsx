@@ -22,7 +22,7 @@ export const RoomItem: React.FC<{
       onPress={() => navigation.navigate('RoomItem', { roomId: data.id })}
     >
       <Image
-        source={{ uri: data.thumbnail.url }}
+        source={{ uri: data.thumbnail?.url }}
         style={{
           width: 84,
           height: 84,

@@ -4,7 +4,9 @@ import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components/native'
 import { CAMERA_ICON, GALLERY_ICON } from 'image'
 import { COLORS } from 'infra/Colors'
-import ImagePicker from 'react-native-image-crop-picker'
+import ImagePicker, {
+  Image as PickerImage,
+} from 'react-native-image-crop-picker'
 
 const Container = styled.TouchableOpacity`
   height: 54px;
@@ -21,7 +23,7 @@ const ItemText = styled.Text`
 export const LdImagePickerBottomSheet: React.FC<{
   isOpen: boolean
   onClose: () => void
-  onImages: (images: string[]) => void
+  onImages: (images: PickerImage[]) => void
 }> = ({ isOpen, onClose, onImages }) => {
   const ref = useRef<RBSheet>(null)
   useEffect(() => {
@@ -38,7 +40,7 @@ export const LdImagePickerBottomSheet: React.FC<{
               multiple: true,
             })
               .then((images) => {
-                onImages(images.map((i) => i.path))
+                onImages(images)
               })
               .catch(() => {})
           }}
@@ -52,7 +54,7 @@ export const LdImagePickerBottomSheet: React.FC<{
               mediaType: 'photo',
             })
               .then((image) => {
-                onImages([image.path])
+                onImages([image])
               })
               .catch(() => {})
           }}

@@ -31,12 +31,11 @@ export const RoomListScreen = observer(() => {
           return <RoomItem data={v.item} />
         }}
         keyExtractor={(v) => `${v.id}`}
-        refreshing={dataStore.loading}
-        onRefresh={() => dataStore.updateRoomList()}
         refreshControl={
           <RefreshControl
             refreshing={dataStore.loading}
             colors={[COLORS.primary500]}
+            onRefresh={() => dataStore.updateRoomList()}
           />
         }
       />

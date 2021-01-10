@@ -6,7 +6,7 @@ export interface User {
 export interface RoomListItem {
   id: number
   title: string
-  thumbnail: {
+  thumbnail?: {
     url: string
   }
   view_count: number
