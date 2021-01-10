@@ -1,113 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Alert, ScrollView, Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { NavigationHeader } from 'component/NavigationHeader'
 import { LdTextInputBorder } from 'component/LdTextInput'
 import { COLORS } from 'infra/Colors'
-import { action, observable } from 'mobx'
 import { observer } from 'mobx-react'
 import { AddRoomImageButton } from 'component/AddRoomImageButton'
 import { LdButton } from 'component/LdButton'
 import { LdImagePickerBottomSheet } from 'component/LdImagePickerBottomSheet'
 import { AddRoomImage } from 'component/AddRoomImage'
-import { roomApi } from 'api/RoomApi'
-import { Image } from 'react-native-image-crop-picker'
-import { showError, toast } from 'infra/Util'
+import { toast } from 'infra/Util'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { Room } from 'infra/Types'
 import { dataStore } from 'store/DataStore'
-
-class AddRoomStore {
-  @observable title: string = ''
-  @observable content: string = ''
-  @observable displayImages: string[] = []
-  internalImages: { url: string }[] = []
-  @observable loading: boolean = false
-  imageLoading: boolean = false
-
-  @action async addImages(images: Image[]) {
-    if (this.imageLoading) return
-    this.imageLoading = true
-    const startIndex = this.displayImages.length
-    const imageCount = images.length
-    this.displayImages = this.displayImages.concat(images.map((i) => i.path))
-    try {
-      const ts = new Date().toISOString()
-      const res = await Promise.all(
-        images.map((i, index) => {
-          return roomApi.postRoomImage({
-            uri: i.path,
-            type: i.mime,
-            name: `${ts}-${index}`,
-          })
-        }),
-      )
-      // set internal images
-      this.internalImages = this.internalImages.concat(res)
-    } catch (e) {
-      showError(e)
-      this.displayImages.splice(startIndex, imageCount)
-      this.internalImages.splice(startIndex, imageCount)
-    } finally {
-      this.imageLoading = false
-    }
-  }
-
-  @action removeImage(index: number) {
-    Alert.alert(
-      '사진 삭제',
-      '사진을 삭제할까요?',
-      [
-        { text: '취소' },
-        {
-          text: '삭제',
-          onPress: () => {
-            this.displayImages.splice(index, 1)
-            this.internalImages.splice(index, 1)
-          },
-        },
-      ],
-      {
-        cancelable: true,
-      },
-    )
-  }
-
-  @action async done(isEdit: boolean): Promise<number | null> {
-    if (this.imageLoading) {
-      return null
-    }
-    if (!this.title.trim().length) {
-      toast('제목을 입력해주세요!')
-      return null
-    }
-    if (!this.content.trim().length) {
-      toast('내용을 입력해주세요!')
-      return null
-    }
-    this.loading = true
-    let id
-    const func = isEdit
-      ? roomApi.putRoom.bind(roomApi)
-      : roomApi.postRoom.bind(roomApi)
-    try {
-      id = await func(this.title, this.content, this.internalImages)
-    } catch (e) {
-      showError(e)
-      id = null
-    } finally {
-      this.loading = false
-    }
-    return id
-  }
-
-  @action feedData(roomData: Room) {
-    if (!roomData) return
-    this.title = roomData.title
-    this.content = roomData.content
-    this.displayImages = roomData.images.map((i) => i.url)
-    this.internalImages = [...roomData.images]
-  }
-}
+import { AddRoomStore } from 'store/AddRoomStore'
 
 export const AddRoomScreen = observer(() => {
   const route = useRoute()
@@ -177,7 +82,7 @@ export const AddRoomScreen = observer(() => {
           <LdButton
             title={isEdit ? '수정하기' : '올리기'}
             onPress={async () => {
-              const roomId = await store.current.done(isEdit)
+              const roomId = await store.current.done()
               if (roomId) {
                 isEdit
                   ? toast('잘 수정되었어요 :)')

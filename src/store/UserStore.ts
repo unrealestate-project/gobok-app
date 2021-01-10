@@ -8,7 +8,7 @@ import { events } from 'infra/Events'
 
 class UserStore {
   constructor() {
-    // events.on(EventType.AUTH_ERROR, () => this.logout())
+    events.on(EventType.AUTH_ERROR, () => this.logout())
   }
 
   @observable loading: boolean = true

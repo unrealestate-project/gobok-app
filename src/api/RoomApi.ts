@@ -45,14 +45,14 @@ class RoomApi extends BaseApi {
     title: string,
     content: string,
     images: { url: string }[],
-  ): Promise<number> {
-    const res = await this.put('/rooms', {
+    roomId: number,
+  ) {
+    const res = await this.put(`/rooms/${roomId}`, {
       title,
       content,
       images,
     })
     if (res.status !== 200) throw new ApiError(res)
-    return res.data.room_id
   }
 
   async deleteRoom(roomId: number) {
