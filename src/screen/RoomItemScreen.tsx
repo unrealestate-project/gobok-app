@@ -13,6 +13,7 @@ import ImageViewer from 'react-native-image-zoom-viewer'
 import Autolink from 'react-native-autolink'
 import { observer } from 'mobx-react'
 import { RoomItemStore } from 'store/RoomItemStore'
+import { getBottomSpace } from 'react-native-iphone-x-helper'
 
 const Title = styled.Text`
   font-size: 26px;
@@ -55,7 +56,12 @@ export const RoomItemScreen = observer(() => {
     <>
       <NavigationHeader title={store.current.title} showBackButton />
       <View
-        style={{ flex: 1, position: 'relative', backgroundColor: COLORS.white }}
+        style={{
+          flex: 1,
+          position: 'relative',
+          backgroundColor: COLORS.white,
+          paddingBottom: getBottomSpace(),
+        }}
       >
         {store.current.data && (
           <ScrollView style={{ flex: 1 }}>

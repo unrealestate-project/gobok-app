@@ -79,6 +79,7 @@ export class AddRoomStore {
       return null
     }
     this.loading = true
+    let id = null
     try {
       if (this.isEdit) {
         await roomApi.putRoom(
@@ -89,14 +90,19 @@ export class AddRoomStore {
         )
         return this.id
       } else {
-        return roomApi.postRoom(this.title, this.content, this.internalImages)
+        id = await roomApi.postRoom(
+          this.title,
+          this.content,
+          this.internalImages,
+        )
       }
     } catch (e) {
       showError(e)
-      return null
+      id = null
     } finally {
       this.loading = false
     }
+    return id
   }
 
   @action feedData(roomData: Room) {

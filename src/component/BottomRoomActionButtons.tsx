@@ -16,8 +16,7 @@ export const BottomRoomActionButtons: React.FC<{
       style={{
         width: '100%',
         flexDirection: 'row',
-        paddingHorizontal: 8,
-        paddingVertical: 8,
+        padding: 8,
       }}
     >
       <LdButton

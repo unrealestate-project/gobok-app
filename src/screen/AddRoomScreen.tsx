@@ -9,10 +9,15 @@ import { LdButton } from 'component/LdButton'
 import { LdImagePickerBottomSheet } from 'component/LdImagePickerBottomSheet'
 import { AddRoomImage } from 'component/AddRoomImage'
 import { toast } from 'infra/Util'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import {
+  CommonActions,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native'
 import { Room } from 'infra/Types'
 import { dataStore } from 'store/DataStore'
 import { AddRoomStore } from 'store/AddRoomStore'
+import { getBottomSpace } from 'react-native-iphone-x-helper'
 
 export const AddRoomScreen = observer(() => {
   const route = useRoute()
@@ -35,7 +40,12 @@ export const AddRoomScreen = observer(() => {
         title={isEdit ? '내 방 수정하기' : '내 방 올리기'}
         showBackButton
       />
-      <ScrollView contentContainerStyle={{ padding: 16 }}>
+      <ScrollView
+        contentContainerStyle={{
+          padding: 16,
+          paddingBottom: 16 + getBottomSpace(),
+        }}
+      >
         <LdTextInputBorder
           placeholder='제목'
           placeholderTextColor={COLORS.gray1}
@@ -87,8 +97,25 @@ export const AddRoomScreen = observer(() => {
                 isEdit
                   ? toast('잘 수정되었어요 :)')
                   : toast('와~ 내 방이 올라갔어요! 🎉')
-                // @ts-ignore
-                navigation.replace('RoomItem', { roomId })
+                if (isEdit) {
+                  navigation.dispatch((state) => {
+                    const routes = [...state.routes]
+                    routes.splice(routes.length - 2)
+                    // @ts-ignore
+                    routes.push({
+                      name: 'RoomItem',
+                      params: { roomId },
+                    })
+                    return CommonActions.reset({
+                      ...state,
+                      routes,
+                      index: routes.length - 1,
+                    })
+                  })
+                } else {
+                  // @ts-ignore
+                  navigation.replace('RoomItem', { roomId })
+                }
                 dataStore.updateRoomList()
               }
             }}

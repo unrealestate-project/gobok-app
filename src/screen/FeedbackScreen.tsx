@@ -8,6 +8,7 @@ import { LdTextInputBorder } from 'component/LdTextInput'
 import { userApi } from 'api/UserApi'
 import { showError, toast } from 'infra/Util'
 import { useNavigation } from '@react-navigation/native'
+import { getBottomSpace } from 'react-native-iphone-x-helper'
 
 export const FeedbackScreen = () => {
   const navigation = useNavigation()
@@ -24,6 +25,7 @@ export const FeedbackScreen = () => {
             position: 'relative',
             backgroundColor: COLORS.white,
             padding: 16,
+            paddingBottom: 16 + getBottomSpace(),
           }}
         >
           <LdTextInputBorder
