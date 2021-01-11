@@ -55,8 +55,12 @@ export const ProfileScreen = () => {
             '로그아웃',
             '정말 로그아웃할까요?',
             [
-              { text: '취소' },
-              { text: '로그아웃', onPress: () => userStore.logout() },
+              { text: '취소', style: 'cancel' },
+              {
+                text: '로그아웃',
+                style: 'destructive',
+                onPress: () => userStore.logout(),
+              },
             ],
             {
               cancelable: true,

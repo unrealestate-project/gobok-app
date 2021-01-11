@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { ScrollView, Text, View } from 'react-native'
+import { Alert, ScrollView, Text, View } from 'react-native'
 import { NavigationHeader } from 'component/NavigationHeader'
 import { LdTextInputBorder } from 'component/LdTextInput'
 import { COLORS } from 'infra/Colors'
@@ -34,6 +34,22 @@ export const AddRoomScreen = observer(() => {
   const store = useRef(new AddRoomStore())
   const navigation = useNavigation()
   const [bottomSheet, setBottomSheet] = useState(false)
+
+  useEffect(() => {
+    navigation.addListener('beforeRemove', (e) => {
+      if (store.current.isEmpty) return
+      e.preventDefault()
+      Alert.alert('작성하던 내용이 사라집니다!', '정말 뒤로 돌아갈까요?', [
+        { text: '취소', style: 'cancel' },
+        {
+          text: '확인',
+          style: 'destructive',
+          onPress: () => navigation.dispatch(e.data.action),
+        },
+      ])
+    })
+  }, [navigation, isEdit])
+
   return (
     <>
       <NavigationHeader

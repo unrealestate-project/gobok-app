@@ -14,6 +14,14 @@ export class AddRoomStore {
   @observable loading: boolean = false
   imageLoading: boolean = false
 
+  @computed get isEmpty(): boolean {
+    return (
+      this.title === '' &&
+      this.content === '' &&
+      this.displayImages.length === 0
+    )
+  }
+
   @computed get isEdit(): boolean {
     return this.id !== null
   }
@@ -51,9 +59,10 @@ export class AddRoomStore {
       '사진 삭제',
       '사진을 삭제할까요?',
       [
-        { text: '취소' },
+        { text: '취소', style: 'cancel' },
         {
           text: '삭제',
+          style: 'destructive',
           onPress: () => {
             this.displayImages.splice(index, 1)
             this.internalImages.splice(index, 1)

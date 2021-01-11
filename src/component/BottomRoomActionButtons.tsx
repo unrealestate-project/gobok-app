@@ -42,9 +42,10 @@ export const BottomRoomActionButtons: React.FC<{
             '내가 올린 방 삭제',
             '정말 방을 삭제할까요?',
             [
-              { text: '취소' },
+              { text: '취소', style: 'cancel' },
               {
                 text: '삭제',
+                style: 'destructive',
                 onPress: () => {
                   store.delete(() => {
                     navigation.goBack()
