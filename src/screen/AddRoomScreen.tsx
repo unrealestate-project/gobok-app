@@ -19,6 +19,8 @@ import { dataStore } from 'store/DataStore'
 import { AddRoomStore } from 'store/AddRoomStore'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 
+let ignoreReset = false
+
 export const AddRoomScreen = observer(() => {
   const route = useRoute()
   const { roomData } = route.params
@@ -28,6 +30,9 @@ export const AddRoomScreen = observer(() => {
 
   useEffect(() => {
     if (roomData) store.current.feedData(roomData)
+    return () => {
+      ignoreReset = false
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -37,7 +42,7 @@ export const AddRoomScreen = observer(() => {
 
   useEffect(() => {
     navigation.addListener('beforeRemove', (e) => {
-      if (store.current.isEmpty) return
+      if (store.current.isEmpty || ignoreReset) return
       e.preventDefault()
       Alert.alert('작성하던 내용이 사라집니다!', '정말 뒤로 돌아갈까요?', [
         { text: '취소', style: 'cancel' },
@@ -113,6 +118,7 @@ export const AddRoomScreen = observer(() => {
                 isEdit
                   ? toast('잘 수정되었어요 :)')
                   : toast('와~ 내 방이 올라갔어요! 🎉')
+                ignoreReset = true
                 if (isEdit) {
                   navigation.dispatch((state) => {
                     const routes = [...state.routes]
