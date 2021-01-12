@@ -70,7 +70,7 @@ export const AddRoomScreen = observer(() => {
         <LdTextInputBorder
           placeholder='제목'
           placeholderTextColor={COLORS.gray1}
-          style={{ marginBottom: 16 }}
+          style={{ marginBottom: 16, paddingHorizontal: 16 }}
           value={store.current.title}
           onChangeText={(v) => {
             store.current.title = v
@@ -84,7 +84,7 @@ export const AddRoomScreen = observer(() => {
             store.current.content = v
           }}
           multiline
-          style={{ marginBottom: 16, height: 24 * 10 + 16 * 2 }}
+          style={{ marginBottom: 16, height: 24 * 10 + 16 * 2, padding: 16 }}
           textAlignVertical='top'
         />
         <View

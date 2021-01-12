@@ -31,14 +31,14 @@ export const FeedbackScreen = () => {
           <LdTextInputBorder
             placeholder='제목'
             placeholderTextColor={COLORS.gray1}
-            style={{ marginBottom: 16 }}
+            style={{ marginBottom: 16, paddingHorizontal: 16 }}
             value={title}
             onChangeText={(v) => setTitle(v)}
           />
           <LdTextInputBorder
             placeholder='내용'
             placeholderTextColor={COLORS.gray1}
-            style={{ flex: 1, marginBottom: 16 }}
+            style={{ flex: 1, marginBottom: 16, padding: 16 }}
             value={content}
             onChangeText={(v) => setContent(v)}
             multiline

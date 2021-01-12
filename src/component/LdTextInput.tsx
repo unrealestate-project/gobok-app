@@ -8,6 +8,7 @@ export const LdTextInputFill = styled.TextInput`
   border-radius: 8px;
   padding: 0 16px;
   font-size: 16px;
+  line-height: 24px;
 `
 
 export const LdTextInputBorder = styled.TextInput`
@@ -15,7 +16,6 @@ export const LdTextInputBorder = styled.TextInput`
   border-color: ${COLORS.gray2};
   border-width: 1px;
   border-radius: 8px;
-  padding: 16px;
   font-size: 16px;
   line-height: 24px;
 `
