@@ -7,7 +7,7 @@ export const LdKeyboardAvoidingView: React.FC = ({ children }) => {
   return (
     <TouchableWithoutFeedback onPress={() => keyboardStore.hide()}>
       <KeyboardAvoidingView
-        behavior={isIOS ? 'padding' : 'padding'}
+        behavior={isIOS ? 'padding' : undefined}
         style={{ flex: 1 }}
       >
         {children}
