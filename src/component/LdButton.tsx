@@ -15,6 +15,7 @@ const ButtonContainer = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  height: 54px;
 `
 
 const ButtonText = styled.Text`
@@ -46,7 +47,7 @@ export const LdButton: React.FC<{
       activeOpacity={ACTIVE_OPACITY}
     >
       {loading ? (
-        <ActivityIndicator size={16} color={COLORS.primary500} />
+        <ActivityIndicator size={20} color={COLORS.primary500} />
       ) : (
         <ButtonText style={textStyle}>{title}</ButtonText>
       )}

@@ -1,8 +1,8 @@
 import { Dimensions, Platform } from 'react-native'
 
 export const SERVER_BASE_URL = !__DEV__
-  ? 'https://landproject-300105.du.r.appspot.com/v1'
-  : 'https://landproject-300105.du.r.appspot.com/v1'
+  ? ' https://landproject-300105.du.r.appspot.com/api/v1'
+  : 'https://dev-dot-landproject-300105.du.r.appspot.com/api/v1'
 
 export const isIOS = Platform.OS === 'ios'
 export const isAOS = Platform.OS === 'android'
