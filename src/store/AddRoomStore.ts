@@ -9,7 +9,10 @@ export class AddRoomStore {
   @observable id: number | null = null
   @observable title: string = ''
   @observable content: string = ''
-  @observable displayImages: string[] = []
+  @observable displayImages: {
+    path: string
+    isLoading: boolean
+  }[] = []
   internalImages: { url: string }[] = []
   @observable loading: boolean = false
   imageLoading: boolean = false
@@ -31,7 +34,14 @@ export class AddRoomStore {
     this.imageLoading = true
     const startIndex = this.displayImages.length
     const imageCount = images.length
-    this.displayImages = this.displayImages.concat(images.map((i) => i.path))
+    this.displayImages = this.displayImages.concat(
+      images.map((i) => {
+        return {
+          path: i.path,
+          isLoading: true,
+        }
+      }),
+    )
     try {
       const ts = new Date().toISOString()
       const res = await Promise.all(
@@ -45,6 +55,9 @@ export class AddRoomStore {
       )
       // set internal images
       this.internalImages = this.internalImages.concat(res)
+      this.displayImages.forEach((i) => {
+        i.isLoading = false
+      })
     } catch (e) {
       showError(e)
       this.displayImages.splice(startIndex, imageCount)
@@ -77,6 +90,7 @@ export class AddRoomStore {
 
   @action async done(): Promise<number | null> {
     if (this.imageLoading) {
+      toast('아직 이미지를 불러오고 있어요!')
       return null
     }
     if (!this.title.trim().length) {
@@ -119,7 +133,12 @@ export class AddRoomStore {
     this.id = roomData.id
     this.title = roomData.title
     this.content = roomData.content
-    this.displayImages = roomData.images.map((i) => i.url)
+    this.displayImages = roomData.images.map((i) => {
+      return {
+        path: i.url,
+        isLoading: false,
+      }
+    })
     this.internalImages = [...roomData.images]
   }
 }

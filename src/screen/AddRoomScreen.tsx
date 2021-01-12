@@ -97,8 +97,9 @@ export const AddRoomScreen = observer(() => {
           <AddRoomImageButton onPress={() => setBottomSheet(true)} />
           {store.current.displayImages.map((img, index) => (
             <AddRoomImage
-              image={img}
-              key={img}
+              image={img.path}
+              key={img.path}
+              loading={img.isLoading}
               index={index}
               onPress={() => store.current.removeImage(index)}
             />

@@ -15,7 +15,7 @@ const ButtonContainer = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  height: 54px;
+  height: 56px;
 `
 
 const ButtonText = styled.Text`

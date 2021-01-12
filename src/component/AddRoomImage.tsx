@@ -1,8 +1,9 @@
 import React from 'react'
-import { Image, Text, TouchableOpacity } from 'react-native'
+import { ActivityIndicator, Image, Text, TouchableOpacity } from 'react-native'
 import { ACTIVE_OPACITY, ADD_IMAGE_SIDE } from 'infra/Constants'
 import { COLORS } from 'infra/Colors'
 import styled from 'styled-components/native'
+import { observer } from 'mobx-react'
 
 const CONTAINER_WIDTH = 20
 
@@ -16,13 +17,27 @@ const CountContainer = styled.View`
   background-color: ${COLORS.primary500};
   justify-content: center;
   align-items: center;
+  z-index: 2;
+`
+
+const LoadingContainer = styled.View`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: ${COLORS.white}cc;
+  z-index: 1;
 `
 
 export const AddRoomImage: React.FC<{
   image: string
+  loading: boolean
   index: number
   onPress: () => void
-}> = ({ image, index, onPress }) => {
+}> = observer(({ image, index, onPress, loading }) => {
   return (
     <TouchableOpacity
       style={{
@@ -44,6 +59,11 @@ export const AddRoomImage: React.FC<{
       <CountContainer>
         <Text style={{ color: COLORS.white, fontSize: 12 }}>{index + 1}</Text>
       </CountContainer>
+      {loading && (
+        <LoadingContainer>
+          <ActivityIndicator size={20} color={COLORS.primary500} />
+        </LoadingContainer>
+      )}
     </TouchableOpacity>
   )
-}
+})
