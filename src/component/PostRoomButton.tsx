@@ -8,7 +8,7 @@ import { dataStore } from 'store/DataStore'
 
 export const PostRoomButton = observer(() => {
   const navigation = useNavigation()
-  if (!dataStore.myRoomLoading) return null
+  if (dataStore.myRoomLoading) return null
   return (
     <View
       style={{
