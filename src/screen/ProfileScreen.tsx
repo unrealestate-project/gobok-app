@@ -41,10 +41,6 @@ export const ProfileScreen = () => {
       >
         <Title style={{ fontWeight: 'bold' }}>{userStore.user?.email}</Title>
       </View>
-      <MenuItemContainer onPress={() => navigation.navigate('RoomItem')}>
-        <Title>내가 올린 방</Title>
-        <Image source={ARROW_RIGHT} />
-      </MenuItemContainer>
       <MenuItemContainer onPress={() => navigation.navigate('Feedback')}>
         <Title>앱 개선사항 제안</Title>
         <Image source={ARROW_RIGHT} />

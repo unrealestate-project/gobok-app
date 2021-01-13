@@ -4,7 +4,10 @@ import { NavigationHeader } from 'component/NavigationHeader'
 import { COLORS } from 'infra/Colors'
 import { LdButton } from 'component/LdButton'
 import { LdKeyboardAvoidingView } from 'component/LdKeyboardAvoidingView'
-import { LdTextInputBorder } from 'component/LdTextInput'
+import {
+  LdTextInputBorder,
+  LdTextInputBorderMultiline,
+} from 'component/LdTextInput'
 import { userApi } from 'api/UserApi'
 import { showError, toast } from 'infra/Util'
 import { useNavigation } from '@react-navigation/native'
@@ -31,14 +34,14 @@ export const FeedbackScreen = () => {
           <LdTextInputBorder
             placeholder='제목'
             placeholderTextColor={COLORS.gray1}
-            style={{ marginBottom: 16, paddingHorizontal: 16 }}
+            style={{ marginBottom: 16 }}
             value={title}
             onChangeText={(v) => setTitle(v)}
           />
-          <LdTextInputBorder
+          <LdTextInputBorderMultiline
             placeholder='내용'
             placeholderTextColor={COLORS.gray1}
-            style={{ flex: 1, marginBottom: 16, padding: 16 }}
+            style={{ flex: 1 }}
             value={content}
             onChangeText={(v) => setContent(v)}
             multiline

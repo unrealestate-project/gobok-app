@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Alert, ScrollView, Text, View } from 'react-native'
 import { NavigationHeader } from 'component/NavigationHeader'
-import { LdTextInputBorder } from 'component/LdTextInput'
+import {
+  LdTextInputBorder,
+  LdTextInputBorderMultiline,
+} from 'component/LdTextInput'
 import { COLORS } from 'infra/Colors'
 import { observer } from 'mobx-react'
 import { AddRoomImageButton } from 'component/AddRoomImageButton'
@@ -70,13 +73,13 @@ export const AddRoomScreen = observer(() => {
         <LdTextInputBorder
           placeholder='제목'
           placeholderTextColor={COLORS.gray1}
-          style={{ marginBottom: 16, paddingHorizontal: 16 }}
+          style={{ marginBottom: 16 }}
           value={store.current.title}
           onChangeText={(v) => {
             store.current.title = v
           }}
         />
-        <LdTextInputBorder
+        <LdTextInputBorderMultiline
           placeholder='내용'
           placeholderTextColor={COLORS.gray1}
           value={store.current.content}
@@ -84,7 +87,7 @@ export const AddRoomScreen = observer(() => {
             store.current.content = v
           }}
           multiline
-          style={{ marginBottom: 16, height: 24 * 10 + 16 * 2, padding: 16 }}
+          style={{ marginBottom: 16, height: 24 * 10 + 16 * 2 }}
           textAlignVertical='top'
         />
         <View
@@ -116,6 +119,7 @@ export const AddRoomScreen = observer(() => {
             onPress={async () => {
               const roomId = await store.current.done()
               if (roomId) {
+                dataStore.updateMyRoom()
                 isEdit
                   ? toast('잘 수정되었어요 :)')
                   : toast('와~ 내 방이 올라갔어요! 🎉')

@@ -13,7 +13,11 @@ import ImageViewer from 'react-native-image-zoom-viewer'
 import Autolink from 'react-native-autolink'
 import { observer } from 'mobx-react'
 import { RoomItemStore } from 'store/RoomItemStore'
-import { getBottomSpace } from 'react-native-iphone-x-helper'
+import {
+  getBottomSpace,
+  getStatusBarHeight,
+} from 'react-native-iphone-x-helper'
+import { dataStore } from 'store/DataStore'
 
 const Title = styled.Text`
   font-size: 26px;
@@ -35,7 +39,6 @@ const RoomImage = styled.Image`
 `
 
 export const RoomItemScreen = observer(() => {
-  const navigation = useNavigation()
   const route = useRoute()
   const { roomId } = route.params
     ? (route.params as { roomId?: number })
@@ -46,9 +49,11 @@ export const RoomItemScreen = observer(() => {
   const [imageModal, setImageModal] = useState(false)
 
   useEffect(() => {
-    store.current.updateData(roomId).then((res) => {
-      if (res === null) navigation.goBack()
-    })
+    if (roomId) {
+      store.current.updateData(roomId)
+    } else {
+      store.current.data = dataStore.myRoom
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -132,7 +137,7 @@ export const RoomItemScreen = observer(() => {
           <TouchableOpacity
             style={{
               position: 'absolute',
-              top: 22,
+              top: 22 + getStatusBarHeight(true),
               right: 8,
               width: 54,
               height: 54,
@@ -150,6 +155,7 @@ export const RoomItemScreen = observer(() => {
             enableSwipeDown
             index={imageIndex}
             saveToLocalByLongPress={false}
+            style={{ paddingTop: getStatusBarHeight(true) }}
           />
         </Modal>
         {store.current.loading && <ScreenSpinner />}

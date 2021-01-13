@@ -13,7 +13,10 @@ export const RoomListScreen = observer(() => {
   useEffect(() => {
     when(
       () => userStore.hasToken,
-      () => dataStore.updateRoomList(),
+      () => {
+        dataStore.updateRoomList()
+        dataStore.updateMyRoom()
+      },
     )
   }, [])
   return (

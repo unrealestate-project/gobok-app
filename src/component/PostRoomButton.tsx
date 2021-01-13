@@ -3,8 +3,10 @@ import { View } from 'react-native'
 import { LdButton } from 'component/LdButton'
 import { COLORS } from 'infra/Colors'
 import React from 'react'
+import { observer } from 'mobx-react'
+import { dataStore } from 'store/DataStore'
 
-export const PostRoomButton = () => {
+export const PostRoomButton = observer(() => {
   const navigation = useNavigation()
   return (
     <View
@@ -15,8 +17,12 @@ export const PostRoomButton = () => {
       }}
     >
       <LdButton
-        title='내 방 올리기'
-        onPress={() => navigation.navigate('AddRoom')}
+        title={dataStore.hasUploadedRoom ? '내가 올린 방' : '내 방 올리기'}
+        onPress={() => {
+          navigation.navigate(
+            dataStore.hasUploadedRoom ? 'RoomItem' : 'AddRoom',
+          )
+        }}
         style={{
           shadowColor: COLORS.black,
           shadowOffset: {
@@ -34,4 +40,4 @@ export const PostRoomButton = () => {
       />
     </View>
   )
-}
+})

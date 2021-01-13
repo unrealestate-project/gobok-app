@@ -1,11 +1,16 @@
-import { action, observable } from 'mobx'
-import { RoomListItem } from 'infra/Types'
+import { action, computed, observable } from 'mobx'
+import { Room, RoomListItem } from 'infra/Types'
 import { roomApi } from 'api/RoomApi'
 import { showError } from 'infra/Util'
 
 class DataStore {
   @observable loading: boolean = false
   @observable roomList: RoomListItem[] = []
+  @observable myRoom: Room | null = null
+
+  @computed get hasUploadedRoom() {
+    return this.myRoom !== null
+  }
 
   @action async updateRoomList() {
     this.loading = true
@@ -16,6 +21,12 @@ class DataStore {
     } finally {
       this.loading = false
     }
+  }
+
+  @action async updateMyRoom() {
+    try {
+      this.myRoom = await roomApi.getMyRoom()
+    } catch (e) {}
   }
 }
 

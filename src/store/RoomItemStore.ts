@@ -17,16 +17,11 @@ export class RoomItemStore {
       : ''
   }
 
-  @action async updateData(roomId?: number): Promise<boolean | null> {
+  @action async updateData(roomId: number): Promise<boolean> {
     let success = false
     try {
       this.loading = true
-      const res = await (roomId ? roomApi.getRoom(roomId) : roomApi.getMyRoom())
-      if (!roomId && !res) {
-        toast('아직 올린 방이 없어요!')
-        return null
-      }
-      this.data = res
+      this.data = await roomApi.getRoom(roomId)
       success = true
     } catch (e) {
       showError(e)
