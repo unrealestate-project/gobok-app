@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Image, Modal, ScrollView, TouchableOpacity, View } from 'react-native'
 import { NavigationHeader } from 'component/NavigationHeader'
-import { useNavigation, useRoute } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native'
 import styled from 'styled-components/native'
 import { COLORS } from 'infra/Colors'
 import moment from 'moment'
@@ -13,11 +13,9 @@ import ImageViewer from 'react-native-image-zoom-viewer'
 import Autolink from 'react-native-autolink'
 import { observer } from 'mobx-react'
 import { RoomItemStore } from 'store/RoomItemStore'
-import {
-  getBottomSpace,
-  getStatusBarHeight,
-} from 'react-native-iphone-x-helper'
+import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { dataStore } from 'store/DataStore'
+import { getSafeStatusBarHeight } from 'infra/Util'
 
 const Title = styled.Text`
   font-size: 26px;
@@ -137,7 +135,7 @@ export const RoomItemScreen = observer(() => {
           <TouchableOpacity
             style={{
               position: 'absolute',
-              top: 22 + getStatusBarHeight(true),
+              top: 22 + getSafeStatusBarHeight(),
               right: 8,
               width: 54,
               height: 54,
@@ -155,7 +153,7 @@ export const RoomItemScreen = observer(() => {
             enableSwipeDown
             index={imageIndex}
             saveToLocalByLongPress={false}
-            style={{ paddingTop: getStatusBarHeight(true) }}
+            style={{ paddingTop: getSafeStatusBarHeight() }}
           />
         </Modal>
         {store.current.loading && <ScreenSpinner />}

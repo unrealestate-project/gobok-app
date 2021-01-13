@@ -1,14 +1,13 @@
 import React from 'react'
 import { StatusBar, View } from 'react-native'
 import { COLORS } from 'infra/Colors'
-import { getStatusBarHeight } from 'react-native-iphone-x-helper'
-import { isIOS } from 'infra/Constants'
+import { getSafeStatusBarHeight } from 'infra/Util'
 
 export const LdStatusBar = () => {
   return (
     <View
       style={{
-        height: isIOS ? getStatusBarHeight(true) : 0,
+        height: getSafeStatusBarHeight(),
         backgroundColor: COLORS.primary500,
       }}
     >
