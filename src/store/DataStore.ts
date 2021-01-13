@@ -4,10 +4,10 @@ import { roomApi } from 'api/RoomApi'
 import { showError } from 'infra/Util'
 
 class DataStore {
-  @observable loading: boolean = false
+  @observable loading: boolean = true
   @observable roomList: RoomListItem[] = []
   @observable myRoom: Room | null = null
-  @observable myRoomLoading: boolean = false
+  @observable myRoomLoading: boolean = true
 
   @computed get hasUploadedRoom() {
     return this.myRoom !== null
