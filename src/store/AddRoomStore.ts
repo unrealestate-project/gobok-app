@@ -90,7 +90,7 @@ export class AddRoomStore {
 
   @action async done(): Promise<number | null> {
     if (this.imageLoading) {
-      toast('아직 이미지를 불러오고 있어요!')
+      toast('아직 이미지를 불러오고 있어요...')
       return null
     }
     if (!this.title.trim().length) {

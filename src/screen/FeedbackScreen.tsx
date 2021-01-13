@@ -41,7 +41,7 @@ export const FeedbackScreen = () => {
           <LdTextInputBorderMultiline
             placeholder='내용'
             placeholderTextColor={COLORS.gray1}
-            style={{ flex: 1 }}
+            style={{ flex: 1, marginBottom: 16 }}
             value={content}
             onChangeText={(v) => setContent(v)}
             multiline
@@ -63,7 +63,6 @@ export const FeedbackScreen = () => {
                 .catch((e) => showError(e))
                 .finally(() => setLoading(false))
             }}
-            style={{ paddingVertical: 16 }}
             textStyle={{ fontSize: 16 }}
             loading={loading}
             disabled={loading}
