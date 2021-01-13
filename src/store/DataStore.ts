@@ -7,6 +7,7 @@ class DataStore {
   @observable loading: boolean = false
   @observable roomList: RoomListItem[] = []
   @observable myRoom: Room | null = null
+  @observable myRoomLoading: boolean = false
 
   @computed get hasUploadedRoom() {
     return this.myRoom !== null
@@ -24,9 +25,13 @@ class DataStore {
   }
 
   @action async updateMyRoom() {
+    this.myRoomLoading = true
     try {
       this.myRoom = await roomApi.getMyRoom()
-    } catch (e) {}
+    } catch (e) {
+    } finally {
+      this.myRoomLoading = false
+    }
   }
 }
 

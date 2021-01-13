@@ -16,6 +16,7 @@ import { RoomItemStore } from 'store/RoomItemStore'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { dataStore } from 'store/DataStore'
 import { getSafeStatusBarHeight } from 'infra/Util'
+import { toJS } from 'mobx'
 
 const Title = styled.Text`
   font-size: 26px;
@@ -50,7 +51,7 @@ export const RoomItemScreen = observer(() => {
     if (roomId) {
       store.current.updateData(roomId)
     } else {
-      store.current.data = dataStore.myRoom
+      store.current.data = toJS(dataStore.myRoom)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

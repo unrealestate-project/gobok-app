@@ -50,9 +50,7 @@ export const BottomRoomActionButtons: React.FC<{
                   store.delete(() => {
                     navigation.goBack()
                     dataStore.updateRoomList()
-                    setTimeout(() => {
-                      dataStore.myRoom = null
-                    }, 3000)
+                    dataStore.myRoom = null
                   })
                 },
               },
